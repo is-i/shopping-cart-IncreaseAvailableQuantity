@@ -17,15 +17,20 @@ public class IncreaseAvailableQuantityUseCase {
     }
 
     public OperationResult execute(int productId) {
-        Product product = productRepository.findById(productId);
+        OperationResult result = null;
 
-        if (product == null ) {
-            return OperationResult.fail("El producto no existe");
+        List <Product> catalogo = productRepository.findAll();
+
+        if (catalogo == null ) result = OperationResult.fail("ERROR INTERNO: NO existe catálogo");
+        else {
+            Product product = productRepository.findById(productId);
+            if (product == null ) result = OperationResult.fail("El producto no existe");
+            else {
+                product.increaseAvailableQuantity(1);
+                productRepository.save(product);
+                result = OperationResult.ok("El producto " + product.getName()  + " tiene ahora disponible(s) " + product.getAvailableQuantity() + " unidad(es) " );
+            }
         }
-
-        product.increaseAvailableQuantity(1);
-        productRepository.save(product);
-
-        return OperationResult.ok("El producto " + product.getName()  + " tiene ahora disponible(s) " + product.getAvailableQuantity() + " unidad(es) " );
+        return result;
     }
 }

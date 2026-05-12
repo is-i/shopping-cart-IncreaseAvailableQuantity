@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="shopping-cart-restar-producto" />
         <module name="shoping-cart-confirmar-compra" />
-        <module name="shopping-cart" />
+        <module name="shopping-cart-IncreaseAvailableQuantity" />
         <module name="shopping-cart-confirmar-compra" />
       </profile>
     </annotationProcessing>
